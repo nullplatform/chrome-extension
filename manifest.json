@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "nullplatform",
+  "version": "1.0",
+  "description": "Utility plugin for tasks such as retrieval of access token",
+  "permissions": ["activeTab", "storage","scripting","clipboardWrite"],
+  "icons": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+  },
+  "action": {
+    "default_popup": "nullplatform-chrome.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  }
+}
