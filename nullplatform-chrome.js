@@ -14,7 +14,7 @@ function updateUI(token) {
             copyButton.style.display = "block";
         }
     } else {
-        title.innerHTML = "No token found, is this a nullplatform tab where you're logged in?";
+        title.innerHTML = "No token found. Is this a Nullplatform tab where you're already logged in?";
         title.style.visibility = "visible";
         label.style.display = "none";
         if (copyButton) {
@@ -77,5 +77,10 @@ copyButton.addEventListener('click', function() {
         })
         .catch(err => {
             console.error('Failed to copy text: ', err);
+        })
+        .finally(() => {
+            setTimeout(() => {
+                copyButton.innerHTML = "Copy to clipboard";
+            }, 2000);
         });
 });
