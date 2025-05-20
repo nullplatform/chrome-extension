@@ -25,7 +25,7 @@ function updateUI(token) {
 
 function getAccessToken() {
     const accessTokenLocalStorageKey = 'accessToken';
-    const accessTokenFetchURL = 'https://bff-dashboard.nullplatform.io/v1/auth/accessToken';
+    const accessTokenFetchURL = 'https://bff-dashboard.nullplatform.io/v1/auth/access_token';
     async function _getAccessToken() {
         try {
             const accessTokenFromLocalStorage = localStorage.getItem(accessTokenLocalStorageKey);
