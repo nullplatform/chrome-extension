@@ -4,8 +4,8 @@
     <title>nullplatform personal Token</title>
     <style>
         p {
-            min-width: 200px; /* Set the minimum width */
-            font-family: "Chakra Petch";
+            min-width: 200px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             font-weight: 400;
             font-size: small;
         }
@@ -18,30 +18,26 @@
         }
 
         .code-block {
-            background-color: #f4f4f4; /* Light grey background */
-            border: 1px solid #ddd; /* Light grey border */
-            border-radius: 5px; /* Optional: rounded corners */
-            padding: 10px; /* Adds space inside the borders */
-            font-family: 'Courier New', Courier, monospace; /* Monospace font */
-            white-space: pre; /* Maintains spacing and line breaks */
-            overflow-x: auto; /* Adds horizontal scrollbar if needed */
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+            white-space: pre;
+            overflow-x: auto;
         }
-
 
         button#copyButton {
             border-radius: 8px;
             padding: 4px 12px;
             border-style: hidden;
-            font-family: "Chakra Petch";
-            font-weight: 400;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-weight: 500;
             font-size: small;
         }
-
     </style>
 </head>
-<body style="
-   
-">
+<body>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 0 600 280" height="20">
             <path fill="#000" d="m526.22,0l-90.11,163.23v-.08c-10.05,1.85-12.51-.82-12.51-21.94V58.36l-46.34-.2v113.2c0,18.04,5.95,36.29,33.01,36.29h1.32l-35.52,64.33h30.26L556.48,0h-30.26Z"></path>
             <path fill="#000" d="m110.74,89.95s-.02,0-.03,0h-25.41c-28.46,0-39.08,19.1-41.85,25.53-.17.4-.76.26-.75-.17l.5-24.1c0-.22-.17-.4-.39-.4l-42.41.16c-.22,0-.39.18-.39.39v115.89c0,.22.18.39.39.39h42.89c.22,0,.39-.18.39-.39v-59.68c0-14.21,19.88-12.95,20.29-12.92,0,0,.01,0,.02,0h23.36c18.04,0,17.84,13.94,17.84,13.94v58.66c0,.22.18.39.39.39h41.25c.22,0,.39-.18.39-.39v-88.39c0-24.19-23.97-28.09-36.48-28.91Z"></path>
@@ -50,7 +46,7 @@
     </svg>
     <p id="title" style="visibility: hidden"></p>
     <p id="token" class="code-block" >Loading...</p>
-    <button id="copyButton">Copy to clipboard</button>
+    <button id="copyButton" style="cursor: pointer;">Copy to clipboard</button>
     <input type="text" value="" id="textToCopy" style="position: absolute; left: -9999px;">
     <script src="nullplatform-chrome.js"></script>
 </body>

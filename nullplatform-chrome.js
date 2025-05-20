@@ -1,31 +1,71 @@
 const copyButton = document.getElementById('copyButton');
 
-document.addEventListener('DOMContentLoaded', function() {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.scripting.executeScript({
-            target: {tabId: tabs[0].id},
-            function: getAccessToken
-        }, (results) => {
-            // Update popup UI with the token
+function updateUI(token) {
+    const title = document.getElementById('title');
+    const label = document.getElementById('token');
 
-        	const pat = results[0]?.result;
+    if (token) {
+        title.style.visibility = "visible";
+        title.innerHTML = "Here is your <b>personal</b> access token:";
+        label.textContent = token;
+        label.style.display = "block";
+        if (copyButton) {
+            copyButton.style.visibility = "visible";
+            copyButton.style.display = "block";
+        }
+    } else {
+        title.innerHTML = "No token found. Is this a Nullplatform tab where you're already logged in?";
+        title.style.visibility = "visible";
+        label.style.display = "none";
+        if (copyButton) {
+            copyButton.style.display = "none";
+        }
+    }
+}
 
-        	const title = document.getElementById('title');
-        	const label = document.getElementById('token');
+function getAccessToken() {
+    const accessTokenLocalStorageKey = 'accessToken';
+    const accessTokenFetchURL = 'https://bff-dashboard.nullplatform.io/v1/auth/access_token';
+    async function _getAccessToken() {
+        try {
+            const accessTokenFromLocalStorage = localStorage.getItem(accessTokenLocalStorageKey);
+            if (accessTokenFromLocalStorage) {
+                return accessTokenFromLocalStorage;
+            }
+            const response = await fetch(accessTokenFetchURL, {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const text = await response.text();
+            
+            const data = JSON.parse(text);
+            const token = data.accessToken;
+            return token;
+        } catch (error) {;
+            return null;
+        }
+    }
+    return _getAccessToken();
+}
 
-        	if(pat) {
-        		title.style.visibility = "visible";
-	    		title.innerHTML = "Here is your <b>personal</b> access token:";
-        		label.textContent = pat;
-        		copyButton.style.visibility = "visible";
-        	} else {
-	    		title.innerHTML = "No token found, is this a nullplatform tab where you're logged in?";
-        		title.style.visibility = "visible";
-        		label.style.display = "none";
-        		copyButton.style.display = "none";
-        	}
-        });
+document.addEventListener('DOMContentLoaded', async function() {
+    const tabs = await chrome.tabs.query({active: true, currentWindow: true});
+    const results = await chrome.scripting.executeScript({
+        target: {tabId: tabs[0].id},
+        function: getAccessToken
     });
+    if (results && results[0] && results[0].result) {
+        const token = await results[0].result;
+        updateUI(token);
+    } else {
+        updateUI(null);
+    }
 });
 
 copyButton.addEventListener('click', function() {
@@ -34,15 +74,13 @@ copyButton.addEventListener('click', function() {
     navigator.clipboard.writeText(copyText.textContent)
         .then(() => {
         	copyButton.innerHTML = "Copy to clipboard &#x2713;"; 
-            console.log('Text copied to clipboard');
         })
         .catch(err => {
             console.error('Failed to copy text: ', err);
+        })
+        .finally(() => {
+            setTimeout(() => {
+                copyButton.innerHTML = "Copy to clipboard";
+            }, 2000);
         });
 });
-
-function getAccessToken() {
-    // Access local storage and return the accessToken
-    return localStorage.getItem('accessToken');
-}
-
