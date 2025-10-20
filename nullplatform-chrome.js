@@ -32,11 +32,13 @@ function getAccessToken() {
             if (accessTokenFromLocalStorage) {
                 return accessTokenFromLocalStorage;
             }
+            const organizationSlug = window.location.hostname?.split?.('.')?.[0];
             const response = await fetch(accessTokenFetchURL, {
                 method: 'GET',
                 credentials: 'include',
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'np-organization-slug': organizationSlug
                 }
             });
             if (!response.ok) {
@@ -45,7 +47,7 @@ function getAccessToken() {
             const text = await response.text();
             
             const data = JSON.parse(text);
-            const token = data.accessToken;
+            const token = data.access_token;
             return token;
         } catch (error) {;
             return null;
