@@ -8,15 +8,50 @@
     <br>
 </h2>
 
-# How to install
-1. Clone this repository to any directory such as `~/nullplatform-chrome/`
-2. Open Google Chrome and type `chrome://extensions` in the URL
-3. Make sure you have enabled the **Developer Mode** and click **Load unpacked extension**
-4. Select the directory where you've downloaded the extension and click `Install`
-(Optional) Once you have installed the extension, you can click on the **Pin** button to have it readily available
 
-# Usage: personal access tokens
-To retrieve your personall access token you have to:
-1. Log into nullplatform
-2. Click the extension and it will open a popup with your personal access token
-3. Click on "Copy to clipboard" button and that's it! now you can Copy the token to any cURL or script that you're crafting.
+This Chrome extension helps you quickly retrieve your **personal access token** and use it to make authenticated calls
+to the nullplatform API.
+
+# How to install or update
+
+1. Clone this repository to any directory, for example:
+
+   ```bash
+   git clone https://github.com/nullplatform/nullplatform-chrome.git ~/nullplatform-chrome
+   ```
+
+2. Open Google Chrome and navigate to `chrome://extensions`.
+3. Enable Developer mode (toggle in the top-right corner).
+4. Click **Load unpacked** and select the directory where you cloned the repository.
+5. The extension will now be installed or updated.
+
+💡 **Tip**: Pin the extension to your Chrome toolbar (📌 icon) for quicker access.
+
+# Usage: Retrieve your personal access token
+
+To retrieve your personal access token, just:
+
+1. Log in to nullplatform in a Chrome tab.
+2. Click the nullplatform extension icon.
+3. A popup will appear showing **your personal access token**.
+4. Click **Copy to clipboard** to easily paste it into any cURL command or script.
+
+# Troubleshooting
+
+If you see the following message when using the extension:
+
+> *"No token found. Make sure you’re logged in to nullplatform in this tab."*
+
+This usually means one of the following:
+
+1. You're not on a logged-in nullplatform tab
+
+    Make sure you have the platform open in a tab where you are already logged in. Then click the extension again.
+
+2. You need to update the extension
+
+    If you’re still seeing this message while on a logged-in tab, update the extension:
+
+      - Remove it and reinstall following the steps in [How to install or update](#how-to-install-or-update)
+
+    We release periodic updates, so make sure you’re using the latest version.
